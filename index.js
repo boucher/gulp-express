@@ -38,7 +38,8 @@ module.exports = (function () {
                 livereload.start(options.port);
             }
 
-            service = child_process.spawn('node', [options.file], {
+            var nodeOptions = (options.nodeOptions || []).concat(options.file);
+            service = child_process.spawn('node', nodeOptions, {
                 NODE_ENV: options.env
             });
             service.stdout.setEncoding('utf8');
